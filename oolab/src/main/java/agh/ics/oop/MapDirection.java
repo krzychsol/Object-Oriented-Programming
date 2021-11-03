@@ -6,50 +6,46 @@ public enum MapDirection {
     EAST,
     WEST;
 
-    public String toString(){
-        switch(this){
-            case NORTH : return "Północ";
-            case SOUTH : return "Południe";
-            case EAST : return "Wschód";
-            case WEST : return "Zachód";
-        }
-        throw new RuntimeException("Case not implemented");
+    public String toString() {
+        return switch (this) {
+            case NORTH -> "Północ";
+            case SOUTH -> "Południe";
+            case EAST -> "Wschód";
+            case WEST -> "Zachód";
+        };
     }
 
-    public MapDirection next(){
-        switch(this){
-            case NORTH : return EAST;
-            case SOUTH : return WEST;
-            case EAST : return SOUTH;
-            case WEST : return NORTH;
-        }
-        throw new RuntimeException("Case not implemented");
+    public MapDirection next() {
+        return switch (this) {
+            case NORTH -> EAST;
+            case SOUTH -> WEST;
+            case EAST -> SOUTH;
+            case WEST -> NORTH;
+        };
     }
 
-    public MapDirection previous(){
-        switch(this){
-            case NORTH : return WEST;
-            case SOUTH : return EAST;
-            case EAST : return NORTH;
-            case WEST : return SOUTH;
-        }
-        throw new RuntimeException("Case not implemented");
+    public MapDirection previous() {
+        return switch (this) {
+            case NORTH -> WEST;
+            case SOUTH -> EAST;
+            case EAST -> NORTH;
+            case WEST -> SOUTH;
+        };
     }
 
-    public Vector2d toUnitVector(){
-        switch(this){
-            case NORTH :
-            {
-                return new Vector2d(0,1);
+    public Vector2d toUnitVector() {
+        switch (this) {
+            case NORTH -> {
+                return new Vector2d(0, 1);
             }
-            case SOUTH :{
-                return new Vector2d(0,-1);
+            case SOUTH -> {
+                return new Vector2d(0, -1);
             }
-            case EAST :{
-                return new Vector2d(1,0);
+            case EAST -> {
+                return new Vector2d(1, 0);
             }
-            case WEST :{
-                return new Vector2d(-1,0);
+            case WEST -> {
+                return new Vector2d(-1, 0);
             }
         }
         throw new RuntimeException("Case not implemented");
