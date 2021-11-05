@@ -2,14 +2,26 @@ package agh.ics.oop;
 
 public class Animal {
     private MapDirection currentDirection = MapDirection.NORTH;
-    private Vector2d currentPosition = new Vector2d(2, 2);
+    private Vector2d currentPosition;
+
+    public Animal(IWorldMap map,Vector2d initialPosition){
+
+        currentPosition = initialPosition;
+    }
 
     public MapDirection curDir(){
         return currentDirection;
     }
 
     public String toString() {
-        return "[" + currentDirection + "," + currentPosition + "]";
+        String ret = "";
+        switch(currentDirection){
+            case NORTH -> ret = "N";
+            case SOUTH -> ret = "S";
+            case EAST -> ret = "E";
+            case WEST -> ret = "W";
+        }
+        return ret;
     }
 
     public boolean isAt(Vector2d position) {
@@ -17,19 +29,19 @@ public class Animal {
     }
 
     public void move(MoveDirection direction) {
+        Vector2d newPostion = currentPosition;
         switch (direction) {
             case RIGHT -> currentDirection = currentDirection.next();
             case LEFT -> currentDirection = currentDirection.previous();
             case FORWARD -> {
-                if (currentPosition.add(currentDirection.toUnitVector()).x <= 4 && currentPosition.add(currentDirection.toUnitVector()).y <= 4 && currentPosition.add(currentDirection.toUnitVector()).x >= 0 && currentPosition.add(currentDirection.toUnitVector()).y >= 0) {
-                    currentPosition = currentPosition.add(currentDirection.toUnitVector());
-                }
+                newPostion = currentPosition.add(currentDirection.toUnitVector());
             }
             case BACKWARD -> {
-                if (currentPosition.subtract(currentDirection.toUnitVector()).x >= 0 && currentPosition.subtract(currentDirection.toUnitVector()).y >= 0 && currentPosition.subtract(currentDirection.toUnitVector()).x <= 4 && currentPosition.subtract(currentDirection.toUnitVector()).y <= 4){
-                    currentPosition = currentPosition.subtract(currentDirection.toUnitVector());
-                }
+                newPostion = currentPosition.subtract(currentDirection.toUnitVector());
             }
+        }
+        if (){
+            currentPosition = newPostion;
         }
     }
 }
