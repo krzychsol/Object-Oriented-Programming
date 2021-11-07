@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class IntegrationTest {
-    Animal horse = new Animal();
+    Animal horse = new Animal(new RectangularMap(4,4),new Vector2d(2,2));
 
     @Test
     public void randomWalkOrientationTest(){
@@ -45,6 +45,7 @@ public class IntegrationTest {
         horse.move(MoveDirection.FORWARD);
         horse.move(MoveDirection.BACKWARD);
         Vector2d expectedPosition = new Vector2d(4,2);
+        System.out.println(horse.curPos());
         assertTrue(horse.isAt(expectedPosition));
     }
 
