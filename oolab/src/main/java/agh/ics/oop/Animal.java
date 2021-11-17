@@ -1,25 +1,16 @@
 package agh.ics.oop;
-import org.jetbrains.annotations.NotNull;
 
-public class Animal{
-
+public class Animal {
     private MapDirection currentDirection = MapDirection.NORTH;
     private Vector2d currentPosition;
-    private final IWorldMap map;
 
     public Animal(IWorldMap map,Vector2d initialPosition){
-        this.map = map;
-        this.currentPosition = initialPosition;
+
+        currentPosition = initialPosition;
     }
 
-    //Getter which get current direction
     public MapDirection curDir(){
         return currentDirection;
-    }
-
-    //Getter which get current position
-    public Vector2d curPos(){
-        return currentPosition;
     }
 
     public String toString() {
@@ -33,12 +24,12 @@ public class Animal{
         return ret;
     }
 
-    public boolean isAt(@NotNull Vector2d position) {
+    public boolean isAt(Vector2d position) {
         return (position.x == currentPosition.x && position.y == currentPosition.y);
     }
 
-    public void move(@NotNull MoveDirection direction) {
-        Vector2d newPostion = new Vector2d(currentPosition.x,currentPosition.y);
+    public void move(MoveDirection direction) {
+        Vector2d newPostion = currentPosition;
         switch (direction) {
             case RIGHT -> currentDirection = currentDirection.next();
             case LEFT -> currentDirection = currentDirection.previous();
@@ -49,7 +40,7 @@ public class Animal{
                 newPostion = currentPosition.subtract(currentDirection.toUnitVector());
             }
         }
-        if(map.canMoveTo(newPostion)){
+        if (){
             currentPosition = newPostion;
         }
     }
