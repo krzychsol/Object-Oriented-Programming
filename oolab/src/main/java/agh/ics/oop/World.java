@@ -1,39 +1,23 @@
 package agh.ics.oop;
 
+import java.util.jar.Manifest;
+
 public class World {
     public static void main(String[] args) {
         System.out.println("System wystartował");
-        MoveDirection[] myArgs = {MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT};
-
-        //Testing MapDirection Class
-        MapDirection direction = MapDirection.EAST;
-        System.out.println(direction);
-        System.out.println(direction.next());
-        System.out.println(direction.previous());
-        System.out.println(direction.toUnitVector());
-
-        run(myArgs);
-
-        //Testing Animal Class
-        Animal hedgehog = new Animal();
-        System.out.println(hedgehog);
-        Vector2d v = new Vector2d(2, 2);
-        System.out.println(hedgehog.isAt(v));
-        hedgehog.move(MoveDirection.RIGHT);
-        hedgehog.move(MoveDirection.FORWARD);
-        hedgehog.move(MoveDirection.FORWARD);
-        hedgehog.move(MoveDirection.FORWARD);
-        System.out.println(hedgehog);
+        //MoveDirection[] myArgs = {MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT};
+        //run(myArgs);
 
         //Moving the animal using OptionParser
-        String[] moves = {"f", "forward", "kaczka", "b", "l", "reka", "r"};
-        OptionsParser parseMoves = new OptionsParser();
-        MoveDirection[] listOfMoves = parseMoves.parse(moves);
-        for (MoveDirection m : listOfMoves) {
-            hedgehog.move(m);
-        }
-        System.out.println(hedgehog);
-        System.out.println("System zakończył działanie ");
+        String[] moves = {"f","b","r","l","f","f","r","r","f","f","f","f","f","f","f","f"};
+        MoveDirection[] directions = new OptionsParser().parse(moves);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IWorldMap grassMap = new GrassField(10);
+        IEngine engine = new SimulationEngine(directions, grassMap, positions);
+        engine.run();
+        System.out.println(grassMap);
+        System.out.println("System zakończył działanie");
+
     }
 
     public static void run(MoveDirection[] arr) {

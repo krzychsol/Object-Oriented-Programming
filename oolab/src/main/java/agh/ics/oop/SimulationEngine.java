@@ -1,7 +1,5 @@
 package agh.ics.oop;
-import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SimulationEngine implements IEngine{
 
@@ -25,6 +23,9 @@ public class SimulationEngine implements IEngine{
         for(MoveDirection m: moves){
             animals.get(curAnimal%numOfAnimals).move(m);
             curAnimal += 1;
+        }
+        for(Animal a: animals){
+            System.out.println(a.curPosition());
         }
     }
 }
