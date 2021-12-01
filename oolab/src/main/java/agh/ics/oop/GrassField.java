@@ -2,7 +2,6 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class GrassField extends AbstractWorldMap{
 
@@ -28,11 +27,9 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        if (!position.follows(new Vector2d(Integer.MIN_VALUE,Integer.MIN_VALUE))
-                || !position.precedes(new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE))){
-            return false;
-        }
-        return super.canMoveTo(position);
+        return super.canMoveTo(position) &&
+        (!position.follows(new Vector2d(Integer.MIN_VALUE,Integer.MIN_VALUE))
+                || !position.precedes(new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE)));
     }
 
     @Override
@@ -60,4 +57,5 @@ public class GrassField extends AbstractWorldMap{
         return super.toString();
 
     }
+
 }

@@ -1,9 +1,9 @@
 package agh.ics.oop;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public abstract class AbstractWorldMap implements IWorldMap{
+public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
     protected List<Animal> animals = new ArrayList<>();
+    protected Map<Vector2d,Animal> AnimalsMap = new HashMap<>();
     protected int width;
     protected int height;
     protected Vector2d lowerL = new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE);
@@ -11,23 +11,16 @@ public abstract class AbstractWorldMap implements IWorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        for(Animal a : animals){
-            if(a.isAt(position)){
-                return false;
-            }
-        }
-        return (position.follows(new Vector2d(0,0)) && position.precedes(new Vector2d(width,height)));
+        return !(objectAt(position) instanceof Animal);
     }
 
     @Override
     public boolean place(Animal animal) {
         Vector2d targetPosition = animal.curPosition();
-        for(Animal a: animals){
-            if (a.isAt(targetPosition)){
-                return false;
-            }
+        if(AnimalsMap.containsKey(targetPosition)){
+            return false;
         }
-        animals.add(animal);
+        AnimalsMap.put(targetPosition,animal);
         return true;
     }
 
@@ -38,21 +31,32 @@ public abstract class AbstractWorldMap implements IWorldMap{
 
     @Override
     public Object objectAt(Vector2d position) {
-        for(Animal a: animals){
-            Vector2d aPosition = a.curPosition();
-            if (aPosition.x == position.x && aPosition.y == position.y){
-                return a;
-            }
+        if(AnimalsMap.containsKey(position)){
+            return AnimalsMap.get(position);
         }
         return null;
     }
 
-    public String toString(){
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        Animal animalAtOldPosition = AnimalsMap.get(oldPosition);
+        AnimalsMap.remove(oldPosition,animalAtOldPosition);
+        AnimalsMap.put(newPosition,animalAtOldPosition);
+    }
 
+    public String toString(){
+        /*
         for(Animal a: animals){
             Vector2d animalPos = a.curPosition();
             lowerL =  lowerL.lowerLeft(animalPos);
             uppperR = uppperR.upperRight(animalPos);
+        }
+        */
+        for (Map.Entry<Vector2d, Animal> vector2dAnimalEntry : AnimalsMap.entrySet()) {
+            Vector2d position = (Vector2d) ((Map.Entry) vector2dAnimalEntry).getKey();
+            lowerL = lowerL.lowerLeft(position);
+            uppperR = uppperR.upperRight(position);
+
         }
 
         MapVisualizer mapVis = new MapVisualizer(this);

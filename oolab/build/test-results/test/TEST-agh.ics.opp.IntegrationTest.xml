@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agh.ics.opp.IntegrationTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-07T11:02:49" hostname="DESKTOP-QTEA1LF" time="0.069">
+<testsuite name="agh.ics.opp.IntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-01T16:49:34" hostname="DESKTOP-6DQP52G" time="0.034">
   <properties/>
-  <testcase name="randomWalkIsInsideTheMapTest()" classname="agh.ics.opp.IntegrationTest" time="0.028"/>
-  <testcase name="isInsideTheMapTest()" classname="agh.ics.opp.IntegrationTest" time="0.001"/>
-  <testcase name="randomWalkPositionTest()" classname="agh.ics.opp.IntegrationTest" time="0.014"/>
-  <testcase name="tryToWalkOutsidePositionTest()" classname="agh.ics.opp.IntegrationTest" time="0.002"/>
-  <testcase name="fourSpinsOrientationTest()" classname="agh.ics.opp.IntegrationTest" time="0.004"/>
-  <testcase name="forwardWalkOrientationTest()" classname="agh.ics.opp.IntegrationTest" time="0.008"/>
-  <testcase name="randomWalkOrientationTest()" classname="agh.ics.opp.IntegrationTest" time="0.002"/>
-  <testcase name="stringInputTest()" classname="agh.ics.opp.IntegrationTest" time="0.001"/>
-  <testcase name="returnToStartPositionTest()" classname="agh.ics.opp.IntegrationTest" time="0.001"/>
-  <system-out><![CDATA[(4,2)
+  <testcase name="SimulationEngineTest()" classname="agh.ics.opp.IntegrationTest" time="0.034"/>
+  <system-out><![CDATA[(2,3)
+(3,3)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,7 +1,5 @@
 package agh.ics.oop;
 
-import java.util.jar.Manifest;
-
 public class World {
     public static void main(String[] args) {
         System.out.println("System wystartował");
@@ -9,7 +7,7 @@ public class World {
         //run(myArgs);
 
         //Moving the animal using OptionParser
-        String[] moves = {"f","b","r","l","f","f","r","r","f","f","f","f","f","f","f","f"};
+        String[] moves = {"f","b","r","l"};
         MoveDirection[] directions = new OptionsParser().parse(moves);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IWorldMap grassMap = new GrassField(10);
@@ -17,7 +15,6 @@ public class World {
         engine.run();
         System.out.println(grassMap);
         System.out.println("System zakończył działanie");
-
     }
 
     public static void run(MoveDirection[] arr) {
