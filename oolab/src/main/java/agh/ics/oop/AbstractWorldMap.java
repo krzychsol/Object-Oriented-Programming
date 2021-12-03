@@ -2,12 +2,15 @@ package agh.ics.oop;
 import java.util.*;
 
 public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObserver {
+
     protected List<Animal> animals = new ArrayList<>();
     protected Map<Vector2d,Animal> AnimalsMap = new HashMap<>();
     protected int width;
     protected int height;
     protected Vector2d lowerL = new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE);
     protected Vector2d uppperR = new Vector2d(Integer.MIN_VALUE,Integer.MIN_VALUE);
+
+    //GRASS FIELD MAP AND RECTANGULAR MAP METHODS
 
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -37,21 +40,9 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
         return null;
     }
 
-    @Override
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        Animal animalAtOldPosition = AnimalsMap.get(oldPosition);
-        AnimalsMap.remove(oldPosition,animalAtOldPosition);
-        AnimalsMap.put(newPosition,animalAtOldPosition);
-    }
 
     public String toString(){
-        /*
-        for(Animal a: animals){
-            Vector2d animalPos = a.curPosition();
-            lowerL =  lowerL.lowerLeft(animalPos);
-            uppperR = uppperR.upperRight(animalPos);
-        }
-        */
+
         for (Map.Entry<Vector2d, Animal> vector2dAnimalEntry : AnimalsMap.entrySet()) {
             Vector2d position = (Vector2d) ((Map.Entry) vector2dAnimalEntry).getKey();
             lowerL = lowerL.lowerLeft(position);
@@ -61,5 +52,14 @@ public abstract class AbstractWorldMap implements IWorldMap,IPositionChangeObser
 
         MapVisualizer mapVis = new MapVisualizer(this);
         return mapVis.draw(new Vector2d(lowerL.x, lowerL.y),new Vector2d(uppperR.x, uppperR.y));
+    }
+
+    //OBSERVER
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        Animal animalAtOldPosition = AnimalsMap.get(oldPosition);
+        AnimalsMap.remove(oldPosition,animalAtOldPosition);
+        AnimalsMap.put(newPosition,animalAtOldPosition);
     }
 }

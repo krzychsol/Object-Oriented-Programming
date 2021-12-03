@@ -9,12 +9,14 @@ public class GrassField extends AbstractWorldMap{
     public final int height;
     public final ArrayList<Grass> grassList = new ArrayList<>();
 
+    //GRASSFIELD CONSTRUCTOR
     public GrassField(int numberOfTuftsOfGrass){
         this.width = (int)Math.sqrt(numberOfTuftsOfGrass*10);
         this.height = (int)Math.sqrt(numberOfTuftsOfGrass*10);
         Random rng = new Random();
         LinkedHashSet<Integer> generated = new LinkedHashSet<>();
 
+        //GENERATE RANDOM TUFTS OF GRASS ON THE MAP
         while (generated.size()<numberOfTuftsOfGrass) {
             int next = rng.nextInt(width*height+1);
             if(generated.add(next)){
@@ -31,6 +33,8 @@ public class GrassField extends AbstractWorldMap{
         (!position.follows(new Vector2d(Integer.MIN_VALUE,Integer.MIN_VALUE))
                 || !position.precedes(new Vector2d(Integer.MAX_VALUE,Integer.MAX_VALUE)));
     }
+
+    //GRASS FIELD METHODS
 
     @Override
     public Object objectAt(Vector2d position) {

@@ -10,38 +10,24 @@ public class Animal{
     private final IWorldMap map;
     private final List<IPositionChangeObserver> observers = new ArrayList<>();
 
+    //ANIMAL CONSTRUCTOR
     public Animal(IWorldMap map,Vector2d initialPosition){
         this.map = map;
         this.currentPosition = initialPosition;
         addObserver((AbstractWorldMap) map);
     }
 
-    //Getter which get current direction
+    //GET ANIMAL DIRECTION
     public MapDirection curDirection(){
         return currentDirection;
     }
 
-    //Getter which get current position
+    //GET ANIMAL POSITION
     public Vector2d curPosition(){
         return currentPosition;
     }
 
-    void positionChanged(Vector2d oldPosition,Vector2d newPosition){
-        for(IPositionChangeObserver o: observers){
-            o.positionChanged(oldPosition,newPosition);
-        }
-    }
-
-    public String toString() {
-        String ret = "";
-        switch(currentDirection){
-            case NORTH -> ret = "N";
-            case SOUTH -> ret = "S";
-            case EAST -> ret = "E";
-            case WEST -> ret = "W";
-        }
-        return ret;
-    }
+    //ANIMAL METHODS
 
     public boolean isAt(@NotNull Vector2d position) {
         return (position.x == currentPosition.x && position.y == currentPosition.y);
@@ -65,6 +51,19 @@ public class Animal{
         }
     }
 
+    public String toString() {
+        String ret = "";
+        switch(currentDirection){
+            case NORTH -> ret = "N";
+            case SOUTH -> ret = "S";
+            case EAST -> ret = "E";
+            case WEST -> ret = "W";
+        }
+        return ret;
+    }
+
+    //OBSERVER
+
     void addObserver(IPositionChangeObserver observer){
         this.observers.add(observer);
     }
@@ -72,4 +71,9 @@ public class Animal{
         this.observers.remove(observer);
     }
 
+    void positionChanged(Vector2d oldPosition,Vector2d newPosition){
+        for(IPositionChangeObserver o: observers){
+            o.positionChanged(oldPosition,newPosition);
+        }
+    }
 }
