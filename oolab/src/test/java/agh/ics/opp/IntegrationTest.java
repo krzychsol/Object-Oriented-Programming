@@ -113,17 +113,16 @@ public class IntegrationTest {
 
     @Test
     public void stringInputTest(){
-
         String[] listOfMoves = {"f","forward","kot","ala","backward","l","r"};
         OptionsParser parser = new OptionsParser();
-        MoveDirection[] parsedList = parser.parse(listOfMoves);
 
-        for(MoveDirection m:parsedList){
-            animal.move(m);
-        }
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse(listOfMoves);
+        });
 
-        Vector2d expectedPosition = new Vector2d(2,3);
-        assertTrue(animal.isAt(expectedPosition));
+        String expectedMessage = " is not legal move specification";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

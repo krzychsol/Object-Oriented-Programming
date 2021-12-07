@@ -34,8 +34,16 @@ public class RectangularMapTest {
     @Test
     public void placeInTheMapOccupiedTest(){
         map.place(animal);
-        Animal animal_tmp = new Animal(map,new Vector2d(2,2));
-        assertFalse(map.place(animal_tmp));
+        Vector2d animalPos =  animal.curPosition();
+        Animal animal_tmp = new Animal(map,animalPos);
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            map.place(animal_tmp);
+        });
+
+        String expectedMessage = "Position "+animalPos+" is not available";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

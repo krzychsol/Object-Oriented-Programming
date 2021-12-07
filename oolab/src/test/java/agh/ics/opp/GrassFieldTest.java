@@ -31,7 +31,15 @@ public class GrassFieldTest {
     public void placeInTheMapOccupiedTest(){
         grassMap.place(animal);
         Animal animal_tmp = new Animal(grassMap,animalPos);
-        assertFalse(grassMap.place(animal_tmp));
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            grassMap.place(animal_tmp);
+        });
+
+        String expectedMessage = "Position "+animalPos+" is not available";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
     }
 
     @Test
