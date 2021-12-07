@@ -50,7 +50,7 @@ public class GrassField extends AbstractWorldMap{
         }
         return null;
     }
-
+    /*
     public String toString(){
         for(Grass g: grassList){
             Vector2d grassPos = g.getPosition();
@@ -61,5 +61,5 @@ public class GrassField extends AbstractWorldMap{
         return super.toString();
 
     }
-
+    */
 }

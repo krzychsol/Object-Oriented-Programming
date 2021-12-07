@@ -25,7 +25,7 @@ public class OptionsParser {
                     dirs[cnt1] = MoveDirection.LEFT;
                     cnt1 += 1;
                 }
-                default -> cnt1 += 0;
+                default -> throw new IllegalArgumentException(a + " is not legal move specification");
             }
         }
         return Arrays.copyOfRange(dirs, 0, cnt1);
