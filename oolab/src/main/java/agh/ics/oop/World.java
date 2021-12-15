@@ -5,6 +5,13 @@ import javafx.application.Application;
 
 public class World {
     public static void main(String[] args) {
-        Application.launch(App.class, args);
+        try {
+            Application.launch(App.class, args);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+
     }
 }
