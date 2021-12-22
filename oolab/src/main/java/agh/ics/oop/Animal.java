@@ -3,7 +3,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal{
+public class Animal implements IMapElement{
 
     private MapDirection currentDirection = MapDirection.NORTH;
     private Vector2d currentPosition;
@@ -23,7 +23,7 @@ public class Animal{
     }
 
     //GET ANIMAL POSITION
-    public Vector2d curPosition(){
+    public Vector2d getPosition(){
         return currentPosition;
     }
 
@@ -60,6 +60,31 @@ public class Animal{
             case WEST -> ret = "W";
         }
         return ret;
+    }
+
+    @Override
+    public String getUpIconPath() {
+        return "src/main/resources/up.png";
+    }
+
+    @Override
+    public String getDownIconPath() {
+        return "src/main/resources/down.png";
+    }
+
+    @Override
+    public String getLeftIconPath() {
+        return "src/main/resources/left.png";
+    }
+
+    @Override
+    public String getRightIconPath() {
+        return "src/main/resources/right.png";
+    }
+
+    @Override
+    public String getGrassIconPath() {
+        return "src/main/resources/grass.png";
     }
 
     //OBSERVER

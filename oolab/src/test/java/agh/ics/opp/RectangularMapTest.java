@@ -34,7 +34,7 @@ public class RectangularMapTest {
     @Test
     public void placeInTheMapOccupiedTest(){
         map.place(animal);
-        Vector2d animalPos =  animal.curPosition();
+        Vector2d animalPos =  animal.getPosition();
         Animal animal_tmp = new Animal(map,animalPos);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {

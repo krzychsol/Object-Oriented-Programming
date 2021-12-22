@@ -1,9 +1,9 @@
 package agh.ics.opp;
 import agh.ics.oop.*;
+import agh.ics.oop.gui.App;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IntegrationTest {
@@ -45,7 +45,7 @@ public class IntegrationTest {
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.BACKWARD);
         Vector2d expectedPosition = new Vector2d(4,2);
-        System.out.println(animal.curPosition());
+        System.out.println(animal.getPosition());
         assertTrue(animal.isAt(expectedPosition));
     }
 
@@ -154,9 +154,10 @@ public class IntegrationTest {
     @Test
     public void SimulationEngineTest(){
         String[] moves = {"f","b","r","l"};
+        App app = new App();
         MoveDirection[] directions = new OptionsParser().parse(moves);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        IEngine engine = new SimulationEngine(directions, map, positions,app);
         engine.run();
         assertTrue(map.isOccupied(new Vector2d(2,3)));
         assertTrue(map.isOccupied(new Vector2d(3,3)));
@@ -165,9 +166,10 @@ public class IntegrationTest {
     @Test
     public void SimulationEngineCollisionTest(){
         String[] moves = {"f","b","r","l","f","f"};
+        App app = new App();
         MoveDirection[] directions = new OptionsParser().parse(moves);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(2,3) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        IEngine engine = new SimulationEngine(directions, map, positions,app);
         engine.run();
         assertTrue(map.isOccupied(new Vector2d(3,2)));
         assertTrue(map.isOccupied(new Vector2d(1,3)));
