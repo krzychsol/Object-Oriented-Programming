@@ -12,7 +12,7 @@ public class WorldSettings {
     public final int startEnergy;
     public final int moveEnergy;
     public final int plantEnergy;
-    public final double jungleRatio;
+    public final int jungleRatio;
     public final int numOfAnimals;
 
     public WorldSettings() throws IllegalArgumentException, IOException, ParseException {
@@ -26,7 +26,7 @@ public class WorldSettings {
             this.startEnergy = ((Number) jsonObj.get("startEnergy")).intValue();
             this.moveEnergy = ((Number) jsonObj.get("moveEnergy")).intValue();
             this.plantEnergy = ((Number) jsonObj.get("plantEnergy")).intValue();
-            this.jungleRatio = ((Number) jsonObj.get("jungleRatio")).doubleValue();
+            this.jungleRatio = ((Number) jsonObj.get("jungleRatio")).intValue();
             this.numOfAnimals = ((Number) jsonObj.get("numOfAnimals")).intValue();
 
             this.validateArgs();
@@ -70,5 +70,4 @@ public class WorldSettings {
         if(var < required)
             throw new IllegalArgumentException(var + " is not a legal " + varName +". "+ varName+" has to be at least " + required);
     }
-
 }
